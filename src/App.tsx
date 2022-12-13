@@ -3,11 +3,12 @@ import './App.css';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Slider, Table } from '@mui/material';
+import PricingRow from './Components/PricingRow';
 
 function createData(
   name: string,
@@ -87,41 +88,53 @@ const rows = [
 
 
 function App() {
+
   return (
     <div className="App">
-      <Paper>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead sx = {{backgroundColor: '#4A918E'}}>
-              <TableRow>
-                <TableCell>Product</TableCell>
-                <TableCell>Usage</TableCell>
-                <TableCell>Monthly Cost</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell>
-                    <Slider sx={{
-                      width: 500, color: '#4A918E', step: null
-                    }}
-                      marks={row.labels}></Slider>
-                  </TableCell>
-                  <TableCell>coming soon</TableCell>
+      <Box sx={{
+        minWidth: "100%",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: 'center'
+      }}>
+        <Paper sx={{ width: '90%', borderRadius: '50%' }}>
+          <TableContainer component={Paper}>
+            <Table sx={{
+              [`& .${tableCellClasses.root}`]: {
+                borderBottom: "none"
+              },
+              minWidth: 650
+            }}>
+              <TableHead sx={{ backgroundColor: '#A4BAB3' }}>
+                <TableRow>
+                  <TableCell>Product</TableCell>
+                  <TableCell>Usage</TableCell>
+                  <TableCell />
+                  <TableCell sx={{
+                    [`& .${tableCellClasses.root}`]: {
+                      borderBottom: "none"
+                    },
+                  }}>Monthly Cost</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </div>
+              </TableHead>
+              <TableRow sx={{ backgroundColor: '#F8F9FA' }}>
+                <TableCell>Habistack</TableCell>
+                <TableCell />
+                <TableCell />
+                <TableCell sx={{ backgroundColor: '#4A918E' }}>free</TableCell>
+              </TableRow>
+              <TableBody>
+                {rows.map((row) => (
+                  <PricingRow thisRow={row} data={rows}/>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </Box>
+    </div >
   );
 }
 
