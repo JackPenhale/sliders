@@ -30,7 +30,7 @@ export function PricingRow(props: any) {
                 width: '55%'
             }}>
                 <Slider sx={{
-                    width: 450, color: '#4A918E',
+                    width: '90%', color: '#4A918E',
                 }}
                     onChange={handleSliderChange}
                     step={null}
