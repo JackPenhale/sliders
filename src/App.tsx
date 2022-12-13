@@ -123,7 +123,7 @@ function App() {
                 <TableCell>Habistack</TableCell>
                 <TableCell />
                 <TableCell />
-                <TableCell sx={{ backgroundColor: '#4A918E' }}>free</TableCell>
+                <TableCell>Free!</TableCell>
               </TableRow>
               <TableBody>
                 {rows.map((row) => (

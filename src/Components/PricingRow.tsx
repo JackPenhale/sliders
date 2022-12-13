@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableRow from '@mui/material/TableRow';
 import { Slider, Table } from '@mui/material';
@@ -7,11 +7,13 @@ import { Slider, Table } from '@mui/material';
 
 export function PricingRow(props: any) {
 
-    const [selectedValue, setValue] = React.useState<number | string | Array<number | string>>(
-        1,
-    );
+    const [selectedValue, setValue] = React.useState(0);
 
-    const handleSliderChange = (event: Event, newValue: number | number[]) => {
+    useEffect(() => {
+        handleSliderChange(null, selectedValue)
+      }, []);
+
+    const handleSliderChange = (event: any, newValue: number | number[]) => {
         let test = props.thisRow.labels.find((x: { value: number | number[]; }) => x.value === newValue);
         setValue(test.label);
     };
@@ -22,7 +24,7 @@ export function PricingRow(props: any) {
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell component="th" scope="row" sx={{
-                width: '15%'
+                width: '20%'
             }}>
                 {props.thisRow.name}
             </TableCell>
@@ -39,7 +41,7 @@ export function PricingRow(props: any) {
             <TableCell sx={{
                 width: '15%'
             }}> {selectedValue}</TableCell>
-            <TableCell sx={{ backgroundColor: '#4A918E',  width: '15%' }}>Coming Soon</TableCell>
+          
         </TableRow>
     )
 }
