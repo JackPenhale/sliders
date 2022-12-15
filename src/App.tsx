@@ -12,78 +12,95 @@ import PricingRow from './Components/PricingRow';
 
 function createData(
   name: string,
-  labels: any,
+  interval: number,
+  numerical: boolean,
+  data: any, 
 ) {
-  return { name, labels };
+  return { name, interval, numerical, data };
 }
 
-const rows = [
-  createData('Forecast Variables',
-    [{
-      value: 0,
-      label: 'Basic',
-    },
+const pricingData = [
+  createData('Forecast Variables', 33, false,
+      [{
+          value: 0,
+          label: 'Basic',
+      },
+      {
+          value: 33,
+          label: 'Categorical',
+      },
+      {
+          value: 66,
+          label: 'Advanced',
+      },
+      {
+          value: 100,
+          label: 'Derived',
+      },]),
+  createData('Point Queries per Request', 40,  true,
+      [{
+          value: 0,
+          label: '1',
+          scaledValue: 1
+      },
+      {
+          value: 40,
+          label: '1k',
+          scaledValue: 1000
+      },
+      {
+          value: 80,
+          label: '10k',
+          scaledValue: 10000
+      },
+      {
+          value: 120,
+          label: '100k',
+          scaledValue: 100000
+      },
+      {
+          value: 160,
+          label: '1m',
+          scaledValue: 1000000
+      },
+      {
+          value: 200,
+          label: '100m',
+          scaledValue:100000000
+      },]),
+  createData('Requests per Day', 40, true,
+   [
     {
-      value: 33,
-      label: 'Categorical',
-    },
-    {
-      value: 66,
-      label: 'Advanced',
-    },
-    {
-      value: 100,
-      label: 'Derived',
-    },]),
-  createData('Point Queries per Request',
-    [{
       value: 0,
       label: '1',
-    },
-    {
-      value: 20,
-      label: '1,000',
+      scaledValue: 1
+      
     },
     {
       value: 40,
-      label: '10,000',
-    },
-    {
-      value: 60,
-      label: '100,000',
+      label: '96',
+      scaledValue: 96
     },
     {
       value: 80,
-      label: '1,000,000',
+      label: '144',
+      scaledValue: 144
     },
     {
-      value: 100,
-      label: '1,000,000,000',
+      value: 120,
+      label: '1,920',
+      scaledValue: 1920
+    },
+    {
+      value: 160,
+      label: '28,800',
+      scaledValue: 28800
+    },
+    {
+      value: 200,
+      label: '86,400',
+      scaledValue: 86400
     },]),
-  createData('Requests per Day', [{
-    value: 0,
-    label: '1',
-  },
-  {
-    value: 20,
-    label: '96',
-  },
-  {
-    value: 40,
-    label: '144',
-  },
-  {
-    value: 60,
-    label: '1,920',
-  },
-  {
-    value: 80,
-    label: '28,800',
-  },
-  {
-    value: 100,
-    label: '86,400',
-  },]),
 ];
 
 
@@ -126,8 +143,8 @@ function App() {
                 <TableCell>Free!</TableCell>
               </TableRow>
               <TableBody>
-                {rows.map((row) => (
-                  <PricingRow thisRow={row} data={rows}/>
+                {pricingData.map((row) => (
+                  <PricingRow thisRow={row} mobile={true} numerical={row.numerical} />
                 ))}
               </TableBody>
             </Table>
