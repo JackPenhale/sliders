@@ -12,7 +12,7 @@ import PricingRow from './Components/PricingRow';
 import PricingGridHeader from './Components/pricing-grid-header';
 import PricingGridSubHeader from './Components/PricingGridSubHeader';
 import PricingGridRow from './Components/PricingGridRow';
-import React from 'react';
+import React, { useState } from 'react';
 
 function createData(
   name: string,
@@ -126,26 +126,6 @@ function App() {
     setRequests(value)
   }
 
-  const [value, setValue] = React.useState<number | string | Array<number | string>>(
-    30,
-  );
-
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue);
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value === '' ? '' : Number(event.target.value));
-  };
-
-  const handleBlur = () => {
-    if (value < 0) {
-      setValue(0);
-    } else if (value > 100) {
-      setValue(100);
-    }
-  };
-
   return (
     <Box>
       <Box sx={{
@@ -156,7 +136,7 @@ function App() {
         justifyContent: "center",
         alignItems: 'center'
       }}>
-        <Paper sx={{ width: { xs: '100%', sm: '90%' } }}>
+        <Paper sx={{ width: { xs: '100%', sm: '90%', borderRadius:'20px'} }}>
           <PricingGridHeader />
           <PricingGridSubHeader
             productName="Habistack"
@@ -172,130 +152,6 @@ function App() {
               variable={handleVariableChange}
               requests={handleRequestValueChange} />
           ))}
-        </Paper>
-      </Box >
-      <Box sx={{
-        minWidth: "100%",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: 'center'
-      }}>
-        <Paper sx={{ width: { xs: '100%', sm: '90%' } }}>
-          <PricingGridHeader />
-          <PricingGridSubHeader
-            productName="Habistack"
-            points={points}
-            variable={variable}
-            requests={requests}
-          />
-          <Grid container alignItems="center"
-            sx={{
-              height: { xs: '100px', sm: '80px' },
-              fontFamily: 'roboto',
-              fontSize: 22
-            }}
-          >
-            <Grid item xs={12} md={2} sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: 'center',
-            }}>
-              <Typography>
-                Point Queries per Request
-              </Typography>
-            </Grid>
-            <Grid item xs={10} md={7} sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: 'center'
-            }}>
-              <Slider
-                sx={{ width: '90%', color: '#4A918E', pb: { xs: 3, sm: 0 } }}
-                onChange={handleSliderChange}
-                value={typeof value === 'number' ? value : 0}
-                min={0}
-                step={1}
-                max={100000000}
-                valueLabelDisplay="auto"
-                aria-labelledby="non-linear-slider"
-              />
-            </Grid>
-            <Grid item xs={2} md={2} sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: 'center'
-            }}>
-              <Input
-                value={value}
-                size="small"
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                inputProps={{
-                  step: 1,
-                  min: 0,
-                  max: 100000000,
-                  type: 'number',
-                  'aria-labelledby': 'input-slider',
-                }}
-              />
-            </Grid>
-            <Grid item xs={6} md={1}>
-              <span />
-            </Grid>
-          </Grid >
-          <Grid container alignItems="center"
-            sx={{
-              height: { xs: '100px', sm: '80px' },
-              fontFamily: 'roboto',
-              fontSize: 22
-            }}
-          >
-            <Grid item xs={12} md={2} sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: 'center',
-            }}>
-              <Typography>
-                Requests per Day
-              </Typography>
-            </Grid>
-            <Grid item xs={10} md={7} sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: 'center'
-            }}>
-              <Slider
-                sx={{ width: '90%', color: '#4A918E', pb: { xs: 3, sm: 0 } }}
-
-                min={0}
-                step={1}
-                max={86400}
-                valueLabelDisplay="auto"
-                aria-labelledby="non-linear-slider"
-              />
-            </Grid>
-            <Grid item xs={2} md={2} sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: 'center'
-            }}>
-              <Typography>
-                TODO: number
-              </Typography>
-            </Grid>
-            <Grid item xs={6} md={1}>
-              <span />
-            </Grid>
-          </Grid >
-
         </Paper>
       </Box >
     </Box>

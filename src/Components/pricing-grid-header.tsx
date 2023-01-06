@@ -5,7 +5,18 @@ import { Box, Grid, Slider, Table, Typography } from '@mui/material';
 
 export function PricingGridHeader(props: any) {
     return (
-        <Grid container alignItems="center" sx={{ backgroundColor: '#A4BAB3', height: '80px', fontFamily: 'roboto', fontSize: 22, display: { xs: 'none', sm: 'flex' } }}
+        <Grid
+            container
+            alignItems="center"
+            sx={{
+                borderTopRightRadius:'25px',
+                borderTopLeftRadius:'25px',
+                backgroundColor: '#A4BAB3',
+                height: '80px',
+                fontFamily: 'roboto',
+                fontSize: 22,
+                display: { xs: 'none', sm: 'flex' }
+            }}
         >
             <Grid item sm={2} sx={{ pl: 2 }}>
                 <Typography>

@@ -28,28 +28,13 @@ export function PricingRow(props: any) {
         } else {
             setValue(event.target.value);
             if (props.thisRow.name === 'Point Queries per Request') {
-                props.pointQueries((scale(selectedValue)))
+                props.pointQueries(selectedValue)
             } else if (props.thisRow.name === 'Requests per Day') {
-                props.requests((scale(selectedValue)))
+                props.requests((selectedValue))
             }
         }
         console.log(event.target)
 
-    };
-
-    const scale = (value: number) => {
-        if (!props.numerical) {
-            return;
-        }
-        const previousMarkIndex = Math.floor(value / props.thisRow.interval);
-        const previousMark = props.thisRow.data[previousMarkIndex];
-        const remainder = value % props.thisRow.interval;
-        if (remainder === 0) {
-            return previousMark.scaledValue;
-        }
-        const nextMark = props.thisRow.data[previousMarkIndex + 1];
-        const increment = (nextMark.scaledValue - previousMark.scaledValue) / props.thisRow.interval;
-        return Math.round(remainder * increment + previousMark.scaledValue);
     };
 
     function numFormatter(num: number) {
@@ -98,7 +83,6 @@ export function PricingRow(props: any) {
                         max={200}
                         valueLabelFormat={numFormatter}
                         marks={props.thisRow.data}
-                        scale={scale}
                         onChange={handleSliderChange}
                         valueLabelDisplay="auto"
                         aria-labelledby="non-linear-slider"
@@ -122,8 +106,7 @@ export function PricingRow(props: any) {
                 alignItems: 'center'
             }}>
                 <Typography>
-                    {props.numerical && (scale(selectedValue))}
-                    {!props.numerical && (selectedValue)}
+                    selectedValue
                 </Typography>
             </Grid>
             <Grid item xs={6} md={1}>
