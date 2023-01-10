@@ -7,155 +7,54 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Grid, Input, Slider, Table, Typography } from '@mui/material';
+import { Button, Grid, Input, Slider, Table, Typography } from '@mui/material';
 import PricingRow from './Components/PricingRow';
 import PricingGridHeader from './Components/pricing-grid-header';
 import PricingGridSubHeader from './Components/PricingGridSubHeader';
 import PricingGridRow from './Components/PricingGridRow';
 import React, { useState } from 'react';
-
-function createData(
-  name: string,
-  interval: number,
-  numerical: boolean,
-  data: any,
-) {
-  return { name, interval, numerical, data };
-}
-
-const pricingData = [
-  createData('Forecast Variables', 33, false,
-    [{
-      value: 0,
-      label: 'Basic',
-    },
-    {
-      value: 33,
-      label: 'Categorical',
-    },
-    {
-      value: 66,
-      label: 'Advanced',
-    },
-    {
-      value: 100,
-      label: 'Derived',
-    },]),
-  createData('Point Queries per Request', 40, true,
-    [{
-      value: 0,
-      label: '1',
-      scaledValue: 1
-    },
-    {
-      value: 40,
-      label: '1k',
-      scaledValue: 1000
-    },
-    {
-      value: 80,
-      label: '10k',
-      scaledValue: 10000
-    },
-    {
-      value: 120,
-      label: '100k',
-      scaledValue: 100000
-    },
-    {
-      value: 160,
-      label: '1m',
-      scaledValue: 1000000
-    },
-    {
-      value: 200,
-      label: '100m',
-      scaledValue: 100000000
-    },]),
-  createData('Requests per Day', 40, true,
-    [
-      {
-        value: 0,
-        label: '1',
-        scaledValue: 1
-
-      },
-      {
-        value: 40,
-        label: '96',
-        scaledValue: 96
-      },
-      {
-        value: 80,
-        label: '144',
-        scaledValue: 144
-      },
-      {
-        value: 120,
-        label: '1,920',
-        scaledValue: 1920
-      },
-      {
-        value: 160,
-        label: '28,800',
-        scaledValue: 28800
-      },
-      {
-        value: 200,
-        label: '86,400',
-        scaledValue: 86400
-      },]),
-];
-
-
-
-
+import SliderBox from './Components/SliderBox';
 
 function App() {
-  const [points, setPoints] = React.useState(0);
-  const [variable, setVariable] = React.useState("");
-  const [requests, setRequests] = React.useState(0);
-
-  function handlePointQueries(value: number) {
-    setPoints(value)
-  }
-  function handleVariableChange(value: string) {
-    setVariable(value);
-  }
-  function handleRequestValueChange(value: number) {
-    setRequests(value)
-  }
-
   return (
-    <Box>
-      <Box sx={{
-        minWidth: "100%",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: 'center'
-      }}>
-        <Paper sx={{ width: { xs: '100%', sm: '90%', borderRadius:'20px'} }}>
-          <PricingGridHeader />
-          <PricingGridSubHeader
-            productName="Habistack"
-            points={points}
-            variable={variable}
-            requests={requests}
-          />
-          {pricingData.map((row) => (
-            <PricingGridRow
-              thisRow={row}
-              numerical={row.numerical}
-              pointQueries={handlePointQueries}
-              variable={handleVariableChange}
-              requests={handleRequestValueChange} />
-          ))}
-        </Paper>
-      </Box >
-    </Box>
+    <Box sx={{ width: '100%', display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', height:'200vh'}}>
+      <Box sx={{ width: '60%', textAlign: 'center', height: '25%' }}>
+        <Typography variant="h1" fontSize={'72px'}>
+          Pricing for what you use
+        </Typography>
+        <Typography variant="h3" fontSize={'24px'}>
+          With flexible pricing from Fathym, use up to x per month for free, and scale your pricing after to meet your needs
+        </Typography>
+        <Box>
+          <Button>
+            Find your price
+          </Button>
+          <Button>
+            Contact sales
+          </Button>
+        </Box>
+      </Box>
+      <Box sx={{ display: 'flex', width: '100%', alignContent: 'center', justifyContent: 'center', flexDirection: 'row', alignItems: 'center', height: '25%' }}>
+        <Box sx={{ textAlign: 'center', width: '50%', display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
+          <Box sx={{ backgroundColor: '#0091ff', borderRadius: '20px', width:'300px', height:'300px'}}>
+            <Typography variant="h3" fontSize={'40px'} >$200</Typography>
+            <Typography>Usage every month for free</Typography>
+          </Box>
+        </Box>
+        <Box sx={{ width: '50%', pl: 4 }}>
+          <Box sx={{ width: '50%' }}>
+            <Typography color={'#0091FF'} fontSize={'20px'}>Pay for what you want</Typography>
+            <Typography fontSize={'20px'}>Scale your pricing plan to only pay for what you use.</Typography>
+            <Typography color={'#0091FF'} fontSize={'20px'}>Support when you need it</Typography>
+            <Typography fontSize={'20px'}>All Fathym users have access to support via our community discord server, docs or direct contact with out support team</Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box sx={{ width: '100%', backgroundColor: '#f2f2f7', pt: 10, height: '50%' }}>
+        <SliderBox />
+      </Box>
 
+    </Box>
   );
 }
 
